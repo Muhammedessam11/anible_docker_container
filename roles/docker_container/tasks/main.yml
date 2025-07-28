@@ -1,0 +1,30 @@
+---
+- name: pull docker image
+  community.docker.docker_image:
+    name: php:8.1-apache
+    source: pull
+
+- name: Remove old container if exists (optional for safety)
+  community.docker.docker_container:
+    name: php_container
+    state: absent
+    force_kill: true
+
+- name: create docker container
+  community.docker.docker_container:
+    name: php_container
+    image: php:8.1-apache
+    state: started
+    restart_policy: always
+    ports:
+      - "8080:80"
+
+- name: Wait a few seconds to ensure container is running
+  ansible.builtin.pause:
+    seconds: 3
+
+- name: Copy a file into the container
+  community.docker.docker_container_copy_into:
+    container: php_container
+    path: /home/ubuntu/mo.txt
+    container_path: /home/mo.txt

@@ -1,0 +1,6 @@
+---
+- name: pull docker image and create container with file Copy
+  hosts: all
+  become: true
+  roles:
+    - docker_container
