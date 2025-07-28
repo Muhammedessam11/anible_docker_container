@@ -1,12 +1,14 @@
+---
 galaxy_info:
   author: Muhammad Essam
-  description: Run PHP container after pulling image
+  role_name: install_docker
+  description: pull image and run a container with copy file from host into it.
   license: MIT
   min_ansible_version: 2.9
   platforms:
-    - name: EL
+    - name: Ubuntu
       versions:
-        - 8
-        - 9
+        - focal
+        - jammy
 
 dependencies: []
